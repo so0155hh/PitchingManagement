@@ -7,24 +7,34 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SumViewController: UIViewController {
-
+    
+ let realm = try! Realm()
+   
+     var notificationToken: NotificationToken? = nil
+    let userDefaults = UserDefaults.standard
+    
+    @IBOutlet weak var sumLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+         //全データを取得して累計投球数を求めたい
+        notificationToken = realm.observe { Notification, realm in
+           
+//            if pitches.count == 1 {
+//                self.sumLabel.text = "1"
+//            }
+            let sum : Int = realm.objects(Pitches.self).sum(ofProperty: "pitchesText")
+           // let sum: Int = pitches.sum(ofProperty: "pitchesText")
 
-        // Do any additional setup after loading the view.
+            self.sumLabel.text = String(sum) + "球"
+            self.userDefaults.set(self.sumLabel.text, forKey: "result")
+            self.userDefaults.synchronize()
+        }
+        let resultSum = userDefaults.string(forKey: "result")
+        sumLabel.text = resultSum
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
 }

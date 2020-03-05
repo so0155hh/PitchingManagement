@@ -10,4 +10,6 @@ import UIKit
 
 class RecordCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var pitchesLabel: UILabel!
 }
