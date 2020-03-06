@@ -48,18 +48,21 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         // let pitches = realm.objects(Pitches.self)
         
         //return pitches.count
+        
         switch direction {
+            //TopMenuのカレンダー表示
         case 0:
-            return daysInMonth[month] + numberOfEmptyBox
+        return daysInMonth[month] + numberOfEmptyBox
+            //次月ボタンを押した時のカレンダー表示
         case 1...:
             return daysInMonth[month] + nextNumberOfEmptyBox
+            //前月ボタンを押した時のカレンダー表示
         case -1 :
             return daysInMonth[month] + previousNumberOfEmptyBox
         default:
             fatalError()
         }
     }
-    
     func GetStartDateDayPosition() {
         switch direction {
             
@@ -93,18 +96,28 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize  {
-        let width: CGFloat = view.frame.width / 2 - 2
-        let height: CGFloat = width
-        return CGSize(width: width, height: height)
-    }
+    //func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
+//      //  let layout = UICollectionViewFlowLayout()
+//        //let mainBoundSize = UIScreen.main.bounds.size
+//
+//              // layout.itemSize = mainBoundSize / 7
+//
+//           //    collectionView.collectionViewLayout = layout
+       // let width: CGFloat = self.view.frame.width / 7
+//       let height: CGFloat = width
+      //  return CGSize(width: width, height: 80)
+  //  }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! RecordCollectionViewCell
         
         cell.dateLabel.textColor = UIColor.black
         cell.backgroundColor = UIColor.clear
+        
+//        let realm = try! Realm()
+//        let pitches = realm.objects(Pitches.self)
+//        let pitchesData = pitches[indexPath.row]
+//        cell.pitchesLabel.text = String(pitchesData.pitchesText)
         
         if cell.isHidden {
             cell.isHidden = false
@@ -124,6 +137,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             cell.isHidden = true
         }
         switch indexPath.row {
+            //土曜の場合は青色
         case 6,13,20,27,34:
             if Int(cell.dateLabel.text!)! > 0 {
                 cell.dateLabel.textColor = UIColor.blue
@@ -143,11 +157,11 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
     }
     
     //Cell内のLabelに投球数を反映させる
-    //        let realm = try! Realm()
-    //        let pitches = realm.objects(Pitches.self)
-    //        let pitchesData = pitches[indexPath.row]
-    //
-    //        cell.pitchesLabel.text = String(pitchesData.pitchesText) + "球"
+//            let realm = try! Realm()
+//            let pitches = realm.objects(Pitches.self)
+//            let pitchesData = pitches[indexPath.row]
+//    
+//            cell.pitchesLabel.text = String(pitchesData.pitchesText) + "球"
     //        cell.backgroundColor = .green
     //        return cell
     // }
@@ -159,11 +173,16 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.itemSize = CGSize(width: 45, height: 80)
-        
-        collectionView.collectionViewLayout = layout
+        //画面サイズを取得
+       // let screenSize = UIScreen.main.bounds.size
+        //取得した画面サイズを7で割る
+       // let width = screenSize.width / 7
+      //  let width: CGFloat = self.view.frame.width / 7 - 2
+
+      //  let layout = UICollectionViewFlowLayout()
+      
+      //  layout.itemSize = CGSize(width: width, height: 80)
+       // collectionView.collectionViewLayout = layout
         
         //現在の月を取得
         currentMonth = months[month]
