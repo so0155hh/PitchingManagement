@@ -96,17 +96,17 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             
         }
     }
-    //func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
 //      //  let layout = UICollectionViewFlowLayout()
 //        //let mainBoundSize = UIScreen.main.bounds.size
 //
 //              // layout.itemSize = mainBoundSize / 7
 //
 //           //    collectionView.collectionViewLayout = layout
-       // let width: CGFloat = self.view.frame.width / 7
+        let width: CGFloat = self.view.frame.width / 7 - 2
 //       let height: CGFloat = width
-      //  return CGSize(width: width, height: 80)
-  //  }
+        return CGSize(width: width, height: 80)
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! RecordCollectionViewCell
