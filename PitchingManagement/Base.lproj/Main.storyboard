@@ -58,7 +58,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sbM-je-neL">
                                 <rect key="frame" x="0.0" y="94" width="320" height="337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="MjG-eL-dMW">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="MjG-eL-dMW">
                                     <size key="itemSize" width="50" height="250"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -66,20 +66,20 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="cOD-Ot-p6z" customClass="RecordCollectionViewCell" customModule="PitchingManagement" customModuleProvider="target">
-                                        <rect key="frame" x="57.5" y="0.0" width="205" height="198"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yI9-dH-Lzm">
-                                            <rect key="frame" x="0.0" y="0.0" width="205" height="198"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKh-Mx-xcW">
-                                                    <rect key="frame" x="0.0" y="10" width="205" height="21"/>
+                                                    <rect key="frame" x="0.0" y="10" width="50" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xn8-g2-O40">
-                                                    <rect key="frame" x="0.0" y="31" width="205" height="21"/>
+                                                    <rect key="frame" x="0.0" y="31" width="50" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -94,7 +94,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="LKh-Mx-xcW" secondAttribute="trailing" id="tPV-8f-7Db"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="205" height="198"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="LKh-Mx-xcW" id="cE4-gs-eeW"/>
                                             <outlet property="pitchesLabel" destination="Xn8-g2-O40" id="ZxI-9u-BiO"/>

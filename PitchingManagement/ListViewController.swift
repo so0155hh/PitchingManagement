@@ -93,20 +93,17 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             positionIndex = previousNumberOfEmptyBox
         default:
             fatalError()
-            
         }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
-//      //  let layout = UICollectionViewFlowLayout()
-//        //let mainBoundSize = UIScreen.main.bounds.size
+//   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
 //
-//              // layout.itemSize = mainBoundSize / 7
+//        let width: CGFloat = self.view.frame.width / 7 - 2
 //
-//           //    collectionView.collectionViewLayout = layout
-        let width: CGFloat = self.view.frame.width / 7 - 2
-//       let height: CGFloat = width
-        return CGSize(width: width, height: 80)
-    }
+//        return CGSize(width: width, height: 80)
+//
+//
+//        // return CGSize(width: collectionView.frame.width / 7, height: 80)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! RecordCollectionViewCell
@@ -155,7 +152,6 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         }
         return cell
     }
-    
     //Cell内のLabelに投球数を反映させる
 //            let realm = try! Realm()
 //            let pitches = realm.objects(Pitches.self)
@@ -172,18 +168,11 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        //画面サイズを取得
-       // let screenSize = UIScreen.main.bounds.size
-        //取得した画面サイズを7で割る
-       // let width = screenSize.width / 7
-      //  let width: CGFloat = self.view.frame.width / 7 - 2
+       
+        let width: CGFloat = collectionView.frame.width / 7 - 2
+        layout.itemSize = CGSize(width: width, height: 80)
+        collectionView.collectionViewLayout = layout
 
-      //  let layout = UICollectionViewFlowLayout()
-      
-      //  layout.itemSize = CGSize(width: width, height: 80)
-       // collectionView.collectionViewLayout = layout
-        
         //現在の月を取得
         currentMonth = months[month]
         monthLabel.text = "\(year)年 \(currentMonth)"
@@ -285,8 +274,15 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             collectionView.reloadData()
         }
     }
-    
 }
+
+//extension UICollectionView: UICollectionViewDelegateFlowLayout {
+//
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width: CGFloat = collectionView.frame.width / 7
+//         return CGSize(width: width, height: 80)
+//    }
+//}
 class Pitches: Object {
     @objc dynamic var pitchesText = 0
     @objc dynamic var situationText = ""
