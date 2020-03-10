@@ -9,9 +9,13 @@
 import UIKit
 import RealmSwift
 
-class ListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
+class ListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource//, UICollectionViewDelegateFlowLayout
+{
     
     @IBOutlet weak var monthLabel: UILabel!
+    
+   // var pitches: Results<Pitches>!
+    let dateFormatter = DateFormatter()
     
     let months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"]
     let daysOfMonth = ["月","火","水","木","金","土","日"]
@@ -70,8 +74,11 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             numberOfEmptyBox = weekday
             dayCounter = day
             while dayCounter > 0 {
+                //週の行数の調整
                 numberOfEmptyBox = numberOfEmptyBox - 1
                 dayCounter = dayCounter - 1
+                //当月が日曜から始まる場合、7日間空ける。そしてL78 - L79で空いた分を戻す
+                //このコードが無いと、カレンダーが4行表示になる
                 if numberOfEmptyBox == 0 {
                     numberOfEmptyBox = 7
                 }
@@ -81,11 +88,13 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             }
             positionIndex = numberOfEmptyBox
             
+            //翌月の月初、空きスペースの表示
         case 1...:
             nextNumberOfEmptyBox = (positionIndex + daysInMonth[month]) % 7
             positionIndex = nextNumberOfEmptyBox
             
         case -1:
+            //前月の空きスペースの表示
             previousNumberOfEmptyBox = (7 - (daysInMonth[month] - positionIndex) % 7)
             if previousNumberOfEmptyBox == 7 {
                 previousNumberOfEmptyBox = 0
@@ -124,12 +133,14 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         case 0:
             cell.dateLabel.text = "\(indexPath.row + 1 - numberOfEmptyBox)"
         case 1:
+            //nextNumberOfEmptyBoxが無いと、月初のスペースが表示されない
             cell.dateLabel.text = "\(indexPath.row + 1 - nextNumberOfEmptyBox)"
         case -1:
             cell.dateLabel.text = "\(indexPath.row + 1 - previousNumberOfEmptyBox)"
         default:
             fatalError()
         }
+        //↓のコードが無いと、空白部分は「0,-1,-2...」と表示されるので、非表示にする
         if Int(cell.dateLabel.text!)! < 1 {
             cell.isHidden = true
         }
@@ -146,9 +157,14 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         default:
             break
         }
-        
+        //現在日の背景を緑色にする
         if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 == day {
             cell.backgroundColor = UIColor.green
+            let realm = try! Realm()
+            let pitches: Int = realm.objects(Pitches.self).sum(ofProperty: "pitchesText")
+            cell.pitchesLabel.text = String(pitches)
+            // let pitchesData = pitches[indexPath.row]
+          //  cell.pitchesLabel.text = Pitches[indexPath.row].pitchesLabel
         }
         return cell
     }
@@ -169,10 +185,12 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         collectionView.dataSource = self
         collectionView.delegate = self
        
-        let width: CGFloat = collectionView.frame.width / 7 - 2
+       // let width: CGFloat = collectionView.frame.width / 7 - 2
+        let width = self.view.frame.width / 8 - 2
+      //  print(self.view.frame.width / 8 - 2)
         layout.itemSize = CGSize(width: width, height: 80)
         collectionView.collectionViewLayout = layout
-
+//print(dateFormatter)
         //現在の月を取得
         currentMonth = months[month]
         monthLabel.text = "\(year)年 \(currentMonth)"
@@ -192,7 +210,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             leapYearCounter = 2
         } else if year % 4 == 3 {
             daysInMonth[1] = 28
-            leapYearCounter = 23
+            leapYearCounter = 3
         }
         
         let realm = try! Realm()
@@ -275,16 +293,9 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         }
     }
 }
-
-//extension UICollectionView: UICollectionViewDelegateFlowLayout {
-//
-//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width: CGFloat = collectionView.frame.width / 7
-//         return CGSize(width: width, height: 80)
-//    }
-//}
 class Pitches: Object {
     @objc dynamic var pitchesText = 0
     @objc dynamic var situationText = ""
     @objc dynamic var sumOfPitches = 0
+    @objc dynamic var registeredDay = Date()
 }
