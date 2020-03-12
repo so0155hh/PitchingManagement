@@ -14,7 +14,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
     
     @IBOutlet weak var monthLabel: UILabel!
     
-   // var pitches: Results<Pitches>!
+   // var myPitches: Results<Pitches>!
     let dateFormatter = DateFormatter()
     
     let userDefaults = UserDefaults.standard
@@ -106,15 +106,6 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             fatalError()
         }
     }
-//   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize  {
-//
-//        let width: CGFloat = self.view.frame.width / 7 - 2
-//
-//        return CGSize(width: width, height: 80)
-//
-//
-//        // return CGSize(width: collectionView.frame.width / 7, height: 80)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! RecordCollectionViewCell
@@ -163,12 +154,17 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 == day {
             cell.backgroundColor = UIColor.green
             let realm = try! Realm()
-            let pitches: Int = realm.objects(Pitches.self).sum(ofProperty: "pitchesText")
+            let pitches: Int = realm.objects(Pitches.self)
+            //.sum(ofProperty: "pitchesText")
+        
             cell.pitchesLabel.text = String(pitches)
+            //self.userDefaults.set(cell.pitchesLabel.text!, forKey: "myPitches")
+            //self.userDefaults.synchronize()
            
-            // let pitchesData = pitches[indexPath.row]
           //  cell.pitchesLabel.text = Pitches[indexPath.row].pitchesLabel
         }
+        // let myPitchesData = userDefaults.string(forKey: "myPitches")
+      //  cell.pitchesLabel.text = myPitchesData
         return cell
     }
     //Cell内のLabelに投球数を反映させる
@@ -216,6 +212,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         }
         
         let realm = try! Realm()
+        
         //データが追加された時にcollectionViewを更新する処理
         notificationToken = realm.observe { Notification, realm in
             self.collectionView.reloadData()

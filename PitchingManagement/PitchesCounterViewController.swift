@@ -24,6 +24,7 @@ class PitchesCounterViewController: UIViewController {
         let pitchesCount = Pitches()
         //var result2 = String(pitchesCount.pitchesText)
         pitchesCount.pitchesText =  Int(self.numberOfPitchesText.text!)!
+        pitchesCount.registeredDay = Date()
        // pitchesCount.pitchesText = numberOfPitchesText.text!
        // pitchesCount.sumOfPitches = numberOfPitchesText.text!
         //データを永続化
