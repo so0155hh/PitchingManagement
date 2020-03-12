@@ -58,7 +58,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sbM-je-neL">
                                 <rect key="frame" x="0.0" y="94" width="320" height="337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="MjG-eL-dMW">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="MjG-eL-dMW">
                                     <size key="itemSize" width="50" height="250"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -131,12 +131,12 @@
                             <constraint firstItem="sbM-je-neL" firstAttribute="leading" secondItem="ZBP-SA-vFl" secondAttribute="leading" id="2BA-vx-r89"/>
                             <constraint firstItem="sbM-je-neL" firstAttribute="top" secondItem="Mwy-qU-MOr" secondAttribute="bottom" constant="10" id="6t9-kC-uti"/>
                             <constraint firstItem="ZBP-SA-vFl" firstAttribute="bottom" secondItem="sbM-je-neL" secondAttribute="bottom" id="9Cf-kg-Uxa"/>
-                            <constraint firstItem="ZBP-SA-vFl" firstAttribute="trailing" secondItem="sbM-je-neL" secondAttribute="trailing" id="H9U-u1-nrE"/>
                             <constraint firstItem="Mwy-qU-MOr" firstAttribute="centerX" secondItem="wHd-cT-Ysa" secondAttribute="centerX" id="K2G-q9-Vg8"/>
                             <constraint firstItem="9X7-2L-YdG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mwy-qU-MOr" secondAttribute="trailing" constant="8" symbolic="YES" id="RHj-wX-f1S"/>
                             <constraint firstItem="ify-C8-Qm5" firstAttribute="leading" secondItem="ZBP-SA-vFl" secondAttribute="leading" id="Tmd-dM-ZW7"/>
                             <constraint firstItem="Mwy-qU-MOr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ify-C8-Qm5" secondAttribute="trailing" constant="8" symbolic="YES" id="YOK-Fo-aTB"/>
                             <constraint firstItem="ify-C8-Qm5" firstAttribute="top" secondItem="ZBP-SA-vFl" secondAttribute="top" constant="10" id="dIE-Yk-wc2"/>
+                            <constraint firstItem="sbM-je-neL" firstAttribute="trailing" secondItem="ZBP-SA-vFl" secondAttribute="trailing" id="hrM-ed-zjj"/>
                             <constraint firstItem="ZBP-SA-vFl" firstAttribute="trailing" secondItem="9X7-2L-YdG" secondAttribute="trailing" id="tJe-cz-VUH"/>
                             <constraint firstItem="Mwy-qU-MOr" firstAttribute="bottom" secondItem="ify-C8-Qm5" secondAttribute="bottom" id="tJg-PK-R4P"/>
                             <constraint firstItem="9X7-2L-YdG" firstAttribute="bottom" secondItem="ify-C8-Qm5" secondAttribute="bottom" id="zpU-5Z-RsX"/>
@@ -244,7 +244,7 @@
                     <tabBarItem key="tabBarItem" title="Item 1" id="QHk-xP-lt8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G9u-Bh-goS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -263,7 +263,7 @@
                     <tabBarItem key="tabBarItem" title="Item 2" id="jz1-0L-Lgs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o4P-G4-vYW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

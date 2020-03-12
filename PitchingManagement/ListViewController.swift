@@ -17,6 +17,8 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
    // var pitches: Results<Pitches>!
     let dateFormatter = DateFormatter()
     
+    let userDefaults = UserDefaults.standard
+    
     let months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"]
     let daysOfMonth = ["月","火","水","木","金","土","日"]
     
@@ -163,6 +165,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
             let realm = try! Realm()
             let pitches: Int = realm.objects(Pitches.self).sum(ofProperty: "pitchesText")
             cell.pitchesLabel.text = String(pitches)
+           
             // let pitchesData = pitches[indexPath.row]
           //  cell.pitchesLabel.text = Pitches[indexPath.row].pitchesLabel
         }
@@ -177,7 +180,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
     //        cell.backgroundColor = .green
     //        return cell
     // }
-    
+   
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -185,12 +188,11 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
         collectionView.dataSource = self
         collectionView.delegate = self
        
-       // let width: CGFloat = collectionView.frame.width / 7 - 2
-        let width = self.view.frame.width / 8 - 2
-      //  print(self.view.frame.width / 8 - 2)
+        let width = self.view.frame.width / 7
+        layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: width, height: 80)
         collectionView.collectionViewLayout = layout
-//print(dateFormatter)
+
         //現在の月を取得
         currentMonth = months[month]
         monthLabel.text = "\(year)年 \(currentMonth)"
